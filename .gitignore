@@ -1,0 +1,63 @@
+# ── secrets ───────────────────────────────────────────────────────
+# Never commit real credentials. .env.example documents the KEYS only.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── the database (regenerate: python -m app.database.seed) ────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── DERIVED RETRIEVAL ARTIFACTS ───────────────────────────────────
+# kb_articles is the source of truth; everything below is rebuildable with
+# `python -m app.rag.ingest --rebuild`. Committing it would mean committing a
+# cache that silently drifts out of date.
+backend/data/
+data/
+*.faiss
+*.npy
+
+# ── model / HF caches (hundreds of MB) ────────────────────────────
+.cache/
+huggingface/
+transformers_cache/
+sentence_transformers/
+torch_cache/
+
+# ── evaluation output (regenerate; never hand-edit) ───────────────
+evaluation/results/
+
+# ── python ────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# ── node / frontend ───────────────────────────────────────────────
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+
+# ── editors and OS ────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# tsc -b output for vite.config.ts
+frontend/vite.config.js
+frontend/vite.config.d.ts
