@@ -1,0 +1,228 @@
+[
+  {
+    "id": "exact_01",
+    "kind": "exact",
+    "query": "ERR-4029",
+    "gold_article_ids": ["kb_011"],
+    "note": "A bare error code. Nothing but the literal token identifies it."
+  },
+  {
+    "id": "exact_02",
+    "kind": "exact",
+    "query": "what does ERR-5102 mean",
+    "gold_article_ids": ["kb_012"],
+    "note": "Card-decline code; embeddings confuse one ERR-5xxx with another."
+  },
+  {
+    "id": "exact_03",
+    "kind": "exact",
+    "query": "ERR-3011",
+    "gold_article_ids": ["kb_002", "kb_014"],
+    "note": "Deliberately ambiguous: this code appears in TWO articles."
+  },
+  {
+    "id": "exact_04",
+    "kind": "exact",
+    "query": "X-RateLimit-Remaining header",
+    "gold_article_ids": ["kb_011"],
+    "note": "A hyphenated header name — the tokeniser must keep it findable."
+  },
+  {
+    "id": "exact_05",
+    "kind": "exact",
+    "query": "ERR-4013 unauthorised",
+    "gold_article_ids": ["kb_011", "kb_003"],
+    "note": "Shared code: rate-limit article and API-keys article both document it."
+  },
+  {
+    "id": "exact_06",
+    "kind": "exact",
+    "query": "X-Signature webhook verification",
+    "gold_article_ids": ["kb_007"],
+    "note": "Header name plus product noun."
+  },
+  {
+    "id": "exact_07",
+    "kind": "exact",
+    "query": "ERR-3007 when importing",
+    "gold_article_ids": ["kb_014"],
+    "note": "Import validation error code."
+  },
+  {
+    "id": "exact_08",
+    "kind": "exact",
+    "query": "ERR-5001",
+    "gold_article_ids": ["kb_011"],
+    "note": "Server-side API error code."
+  },
+  {
+    "id": "exact_09",
+    "kind": "exact",
+    "query": "SPF DKIM DMARC records",
+    "gold_article_ids": ["kb_015"],
+    "note": "Three exact technical acronyms."
+  },
+  {
+    "id": "exact_10",
+    "kind": "exact",
+    "query": "ERR-5111",
+    "gold_article_ids": ["kb_012"],
+    "note": "Another card-decline code."
+  },
+
+  {
+    "id": "para_01",
+    "kind": "paraphrase",
+    "query": "two people left the company and we are still paying for them",
+    "gold_article_ids": ["kb_009"],
+    "note": "Docs say 'seats' and 'deactivate'; the customer says neither."
+  },
+  {
+    "id": "para_02",
+    "kind": "paraphrase",
+    "query": "we want everyone to sign in with our company credentials instead of a separate password",
+    "gold_article_ids": ["kb_004"],
+    "note": "Docs say 'SAML single sign-on'."
+  },
+  {
+    "id": "para_03",
+    "kind": "paraphrase",
+    "query": "the numbers in the file I downloaded do not match what I see on screen",
+    "gold_article_ids": ["kb_008"],
+    "note": "Docs say 'dashboard' and 'exported files'."
+  },
+  {
+    "id": "para_04",
+    "kind": "paraphrase",
+    "query": "how long do you keep our information after we leave",
+    "gold_article_ids": ["kb_010"],
+    "note": "Docs say 'retention' and 'deleting a workspace'."
+  },
+  {
+    "id": "para_05",
+    "kind": "paraphrase",
+    "query": "I lost my phone and cannot get the code to sign in",
+    "gold_article_ids": ["kb_013"],
+    "note": "Docs say 'two-factor authentication' and 'recovery codes'."
+  },
+  {
+    "id": "para_06",
+    "kind": "paraphrase",
+    "query": "can we get money back for something we were charged",
+    "gold_article_ids": ["kb_006"],
+    "note": "Docs say 'refund'."
+  },
+  {
+    "id": "para_07",
+    "kind": "paraphrase",
+    "query": "have a summary emailed to my manager every Monday morning",
+    "gold_article_ids": ["kb_001"],
+    "note": "Docs say 'scheduled reports' and 'weekly'."
+  },
+  {
+    "id": "para_08",
+    "kind": "paraphrase",
+    "query": "our messages keep landing in the junk folder",
+    "gold_article_ids": ["kb_015"],
+    "note": "Docs say 'spam' and 'deliverability'."
+  },
+  {
+    "id": "para_09",
+    "kind": "paraphrase",
+    "query": "how quickly will a person reply when everything is broken",
+    "gold_article_ids": ["kb_016"],
+    "note": "Docs say 'first response target' and 'severity 1'."
+  },
+  {
+    "id": "para_10",
+    "kind": "paraphrase",
+    "query": "you tried to take payment and the bank refused it",
+    "gold_article_ids": ["kb_012"],
+    "note": "Docs say 'failed payment' and 'card decline'."
+  },
+  {
+    "id": "para_11",
+    "kind": "paraphrase",
+    "query": "bring our existing customer list into the system from a spreadsheet",
+    "gold_article_ids": ["kb_014"],
+    "note": "Docs say 'importing contacts from a file'."
+  },
+  {
+    "id": "para_12",
+    "kind": "paraphrase",
+    "query": "our account is overdue because a payment did not go through",
+    "gold_article_ids": ["kb_012", "kb_005"],
+    "note": "Docs say 'past due'."
+  },
+
+  {
+    "id": "mixed_01",
+    "kind": "mixed",
+    "query": "how do I rotate an API key without downtime",
+    "gold_article_ids": ["kb_003"],
+    "note": "Natural how-to with strong keyword overlap."
+  },
+  {
+    "id": "mixed_02",
+    "kind": "mixed",
+    "query": "export a table view to CSV",
+    "gold_article_ids": ["kb_002"],
+    "note": "Competes with kb_008 and kb_014, which also mention CSV."
+  },
+  {
+    "id": "mixed_03",
+    "kind": "mixed",
+    "query": "why did my webhook stop being delivered",
+    "gold_article_ids": ["kb_007"],
+    "note": "Automatic pausing after repeated failures."
+  },
+  {
+    "id": "mixed_04",
+    "kind": "mixed",
+    "query": "add a new user to our workspace",
+    "gold_article_ids": ["kb_009"],
+    "note": "Seat management."
+  },
+  {
+    "id": "mixed_05",
+    "kind": "mixed",
+    "query": "understanding the charges on my invoice",
+    "gold_article_ids": ["kb_005"],
+    "note": "Competes with kb_006 and kb_012, which also discuss billing."
+  },
+  {
+    "id": "mixed_06",
+    "kind": "mixed",
+    "query": "schedule a report to be delivered as a PDF",
+    "gold_article_ids": ["kb_001"],
+    "note": "Delivery formats section."
+  },
+  {
+    "id": "mixed_07",
+    "kind": "mixed",
+    "query": "am I allowed a partial refund for unused seats",
+    "gold_article_ids": ["kb_006"],
+    "note": "Overlaps kb_009 vocabulary ('seats') — the ranker must discriminate."
+  },
+  {
+    "id": "mixed_08",
+    "kind": "mixed",
+    "query": "my scheduled report is not arriving",
+    "gold_article_ids": ["kb_001"],
+    "note": "Troubleshooting section of the scheduling article."
+  },
+  {
+    "id": "mixed_09",
+    "kind": "mixed",
+    "query": "require two-factor authentication for every member",
+    "gold_article_ids": ["kb_013"],
+    "note": "Workspace enforcement."
+  },
+  {
+    "id": "mixed_10",
+    "kind": "mixed",
+    "query": "what are the API rate limits",
+    "gold_article_ids": ["kb_011"],
+    "note": "Direct topical match."
+  }
+]

@@ -1,0 +1,90 @@
+# CI — every push and pull request.
+#
+# The pipeline is: test → seed → ingest → evaluate → GATE.
+#
+# The gate is the part that matters. It fails the build if the agent has become
+# less safe (an injection got through, a forbidden tool ran, a citation was
+# fabricated) or if retrieval quality dropped. A prompt change that quietly
+# makes the system worse cannot reach main.
+#
+# The whole pipeline runs with MODEL_PROVIDER=mock, so CI needs NO API key and
+# costs nothing.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    env:
+      MODEL_PROVIDER: mock
+      LOG_LEVEL: WARNING
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # The unit suite runs with EMBEDDING_PROVIDER=hashing (set in
+      # tests/conftest.py), so it needs no model download and finishes in
+      # seconds. Slow tests that need the real model are excluded here and
+      # covered by the evaluation job below.
+      - name: Run tests
+        working-directory: backend
+        run: pytest -m "not slow" --cov=app --cov-report=term-missing
+
+      - name: Seed the database
+        working-directory: backend
+        run: python -m app.database.seed
+
+      # Downloads all-MiniLM-L6-v2 (~90 MB) once, then runs offline.
+      - name: Build the retrieval index
+        working-directory: backend
+        run: python -m app.rag.ingest --rebuild
+
+      - name: Retrieval evaluation (lexical vs semantic vs hybrid)
+        run: python evaluation/retrieval_eval.py --no-rebuild
+
+      - name: Agent evaluation (prompt v1 vs v2)
+        run: python evaluation/run_eval.py --compare-prompts v1 v2
+
+      # THE GATE. Non-zero exit fails the build.
+      - name: Regression gate
+        run: python evaluation/gate.py
+
+      - name: Upload evaluation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-results
+          path: evaluation/results/
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
