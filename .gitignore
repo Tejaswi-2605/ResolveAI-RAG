@@ -61,3 +61,7 @@ Thumbs.db
 # tsc -b output for vite.config.ts
 frontend/vite.config.js
 frontend/vite.config.d.ts
+
+ARCHITECTURE.md
+CHANGELOG.md
+INTERVIEW_NOTES.md
